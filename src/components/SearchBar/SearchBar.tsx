@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import styles from './SearchBar.module.css';
 import { TProduct } from '../../types';
 
@@ -7,7 +7,7 @@ interface SearchBarProps {
 }
 
 export function SearchBar({ onSearch }: SearchBarProps) {
-    const [id, setId] = useState<number>(-1);
+    const [id, setId] = useState<string>('');
     const [name, setName] = useState<string>('');
     const [type, setType] = useState<string>('');
 
@@ -15,13 +15,21 @@ export function SearchBar({ onSearch }: SearchBarProps) {
         onSearch({ id, name, type });
     }
 
+    function handleIdChange(event: ChangeEvent<HTMLInputElement>) {
+        const value: string = event.target.value;
+        // check if only positive numbers
+        if (/^\d*$/.test(value)) {
+            setId(value);
+        }
+    }
+
     return (
         <div className={styles.searchBar}>
             <input
-                type='number'
-                placeholder={id === -1 ? 'Идентификатор' : ''}
-                value={id === -1 ? '' : id}
-                onChange={(e) => setId(parseInt(e.target.value))}
+                type='text'
+                placeholder='Идентификатор'
+                value={id}
+                onChange={handleIdChange}
             />
             <input
                 type='text'

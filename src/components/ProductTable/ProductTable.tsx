@@ -1,18 +1,8 @@
-import React from 'react';
 import styles from './ProductTable.module.css'; // Подключаем модульные стили
-
-interface ProductTableProps {
-    id: number;
-    name: string;
-    type: string;
-}
-
-interface Props {
-    products: ProductTableProps[];
-}
+import { TProduct } from '../../types';
 
 //* Display product data as a table
-export function ProductTable({ products }: Props) {
+export function ProductTable({ products }: { products: TProduct[] }) {
     return (
         <table className={styles.table}>
             <thead>
