@@ -6,6 +6,7 @@ interface SearchBarProps {
     onSearch: ({ id, name, type }: TProduct) => void;
 }
 
+//* Display 3 section search (id, name, type) and "find" button
 export function SearchBar({ onSearch }: SearchBarProps) {
     const [id, setId] = useState<string>('');
     const [name, setName] = useState<string>('');
