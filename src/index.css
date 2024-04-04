@@ -23,8 +23,11 @@ nav {
     vertical-align: baseline;
     border: 0;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 html {
     padding: 16px;
+    width: 1280px;
+    margin: 0 auto;
 }
