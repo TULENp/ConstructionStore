@@ -3,7 +3,7 @@ import styles from './MainPage.module.css';
 import { SearchBar } from '../../components/SearchBar';
 import data from '../../mockup/MockupData.json';
 import { TProduct } from '../../types';
-import { ProductTable } from '../../components/SearchBar/ProductTable';
+import { ProductTable } from '../../components/ProductTable';
 
 export function MainPage() {
     const [products, setProducts] = useState<TProduct[]>(data);
