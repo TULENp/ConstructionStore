@@ -1,24 +1,27 @@
-import React, { useState } from 'react';
-import styles from './SearchBar.module.css'; 
+import { useState } from 'react';
+import styles from './SearchBar.module.css';
+import { TProduct } from '../../types';
 
-export function SearchBar() {
-    const [id, setId] = useState<number | ''>('');
+interface SearchBarProps {
+    onSearch: ({ id, name, type }: TProduct) => void;
+}
+
+export function SearchBar({ onSearch }: SearchBarProps) {
+    const [id, setId] = useState<number>(-1);
     const [name, setName] = useState<string>('');
     const [type, setType] = useState<string>('');
 
-    const handleSearch = () => {
-        console.log('Identifier:', id);
-        console.log('Name:', name);
-        console.log('Type:', type);
-    };
+    function handleSearch() {
+        onSearch({ id, name, type });
+    }
 
     return (
         <div className={styles.searchBar}>
             <input
                 type='number'
-                placeholder='Идентификатор'
-                value={id}
-                onChange={(e) => setId(parseInt(e.target.value) || '')}
+                placeholder={id === -1 ? 'Идентификатор' : ''}
+                value={id === -1 ? '' : id}
+                onChange={(e) => setId(parseInt(e.target.value))}
             />
             <input
                 type='text'
@@ -28,9 +31,9 @@ export function SearchBar() {
             />
             <select value={type} onChange={(e) => setType(e.target.value)}>
                 <option value=''>Выберите вид товара</option>
-                <option value='0'>Железо</option>
-                <option value='1'>Пластик</option>
-                <option value='2'>Дерево</option>
+                <option value='железо'>Железо</option>
+                <option value='пластик'>Пластик</option>
+                <option value='дерево'>Дерево</option>
             </select>
             <button className={styles.searchButton} onClick={handleSearch}>
                 Найти
